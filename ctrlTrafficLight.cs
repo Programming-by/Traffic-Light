@@ -34,15 +34,15 @@ namespace Traffic_Light_Project
                 {
                     case LightEnum.Red:
                         pbLight.Image = Resources.Red;
-                        lblCountDown.ForeColor = Color.Red;
+                        //lblCountDown.ForeColor = Color.Red;
                         break;
                     case LightEnum.Orange:
                         pbLight.Image = Resources.Orange;
-                        lblCountDown.ForeColor = Color.Orange;
+                        //lblCountDown.ForeColor = Color.Orange;
                         break;
                         case LightEnum.Green:
                         pbLight.Image = Resources.Green;
-                        lblCountDown.ForeColor = Color.Green;
+                        //lblCountDown.ForeColor = Color.Green;
                         break;
                 }
             
@@ -133,6 +133,46 @@ namespace Traffic_Light_Project
             GreenLightOn?.Invoke(this, e);
         }
 
+        public event EventHandler<TrafficLightEventArgs> FirstTrafficLightOn;
+        public void RaiseFirstTrafficLightOn()
+        {
+            RaiseFirstTrafficLightOn(new TrafficLightEventArgs(LightEnum.Red, _RedTime));
+        }
+        protected virtual void RaiseFirstTrafficLightOn(TrafficLightEventArgs e)
+        {
+            FirstTrafficLightOn?.Invoke(this, e);
+        }
+
+        public event EventHandler<TrafficLightEventArgs> SecondTrafficLightOn;
+        public void RaiseSecondTrafficLightOn()
+        {
+            RaiseSecondTrafficLightOn(new TrafficLightEventArgs(LightEnum.Red, _RedTime));
+        }
+        protected virtual void RaiseSecondTrafficLightOn(TrafficLightEventArgs e)
+        {
+            SecondTrafficLightOn?.Invoke(this, e);
+        }
+
+        public event EventHandler<TrafficLightEventArgs> ThirdTrafficLightOn;
+        public void RaiseThirdTrafficLightOn()
+        {
+            RaiseThirdTrafficLightOn(new TrafficLightEventArgs(LightEnum.Red, _RedTime));
+        }
+        protected virtual void RaiseThirdTrafficLightOn(TrafficLightEventArgs e)
+        {
+            ThirdTrafficLightOn?.Invoke(this, e);
+        }
+
+
+        public event EventHandler<TrafficLightEventArgs> FourthTrafficLightOn;
+        public void RaiseFourthTrafficLightOn()
+        {
+            RaiseFourthTrafficLightOn(new TrafficLightEventArgs(LightEnum.Red, _RedTime));
+        }
+        protected virtual void RaiseFourthTrafficLightOn(TrafficLightEventArgs e)
+        {
+            FourthTrafficLightOn?.Invoke(this, e);
+        }
 
         public int GetCurrentTime()
         {
@@ -151,13 +191,13 @@ namespace Traffic_Light_Project
         public void Start()
         {
             _CurrentCountDownValue = GetCurrentTime();
-            lblCountDown.Text = _CurrentCountDownValue.ToString();
+            //lblCountDown.Text = _CurrentCountDownValue.ToString();
 
             LightTimer.Start();
         }
         private void LightTimer_Tick(object sender, EventArgs e)
         {
-            lblCountDown.Text = _CurrentCountDownValue.ToString();
+            //lblCountDown.Text = _CurrentCountDownValue.ToString();
 
             if (_CurrentCountDownValue == 0)
             {
@@ -177,7 +217,7 @@ namespace Traffic_Light_Project
                     _LightAfterOrangeGreenOrRed = LightEnum.Green;
                     _CurrentCountDownValue = _OrangeTime;
                     CurrentLight = LightEnum.Orange;
-                    lblCountDown.Text = _CurrentCountDownValue.ToString();
+                    //lblCountDown.Text = _CurrentCountDownValue.ToString();
                     RaiseOrangeLightOn();
                     break;
 
@@ -186,7 +226,7 @@ namespace Traffic_Light_Project
                     {
                         _CurrentCountDownValue = _GreenTime;
                         CurrentLight = LightEnum.Green;
-                        lblCountDown.Text = _CurrentCountDownValue.ToString();
+                        //lblCountDown.Text = _CurrentCountDownValue.ToString();
 
                         RaiseGreenLightOn();
                     }
@@ -194,8 +234,19 @@ namespace Traffic_Light_Project
                     {
                         _CurrentCountDownValue = _RedTime;
                         CurrentLight = LightEnum.Red;
-                        lblCountDown.Text = _CurrentCountDownValue.ToString();
-                        RaiseRedLightOn();
+                        //lblCountDown.Text = _CurrentCountDownValue.ToString();
+                      //  RaiseRedLightOn();
+                        LightTimer.Stop();
+
+
+                        RaiseSecondTrafficLightOn();
+
+                        RaiseThirdTrafficLightOn();
+
+                        RaiseFourthTrafficLightOn();
+
+                        RaiseFirstTrafficLightOn();
+
                     }
 
                     break;
@@ -203,7 +254,7 @@ namespace Traffic_Light_Project
                     _LightAfterOrangeGreenOrRed = LightEnum.Red;
                     _CurrentCountDownValue = _OrangeTime;
                     CurrentLight = LightEnum.Orange;
-                    lblCountDown.Text = _CurrentCountDownValue.ToString();
+                    //lblCountDown.Text = _CurrentCountDownValue.ToString();
                     RaiseOrangeLightOn();
                     break;
 

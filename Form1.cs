@@ -19,23 +19,25 @@ namespace Traffic_Light_Project
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ctrlTrafficLight1.Start();
+            ctrlTrafficLightFirst.Start();
         }
-
-        private void ctrlTrafficLight1_RedLightOn(object sender, ctrlTrafficLight.TrafficLightEventArgs e)
+        private void ctrlTrafficLightFirst_SecondTrafficLightOn(object sender, ctrlTrafficLight.TrafficLightEventArgs e)
         {
-            MessageBox.Show(e.CurrentLight.ToString());
+           ctrlTrafficLightSecond.Start();
         }
-
-        private void ctrlTrafficLight1_OrangeLightOn(object sender, ctrlTrafficLight.TrafficLightEventArgs e)
+        private void ctrlTrafficLightSecond_ThirdTrafficLightOn(object sender, ctrlTrafficLight.TrafficLightEventArgs e)
         {
-            MessageBox.Show(e.CurrentLight.ToString());
+            ctrlTrafficLightThird.Start();
 
         }
-
-        private void ctrlTrafficLight1_GreenLightOn(object sender, ctrlTrafficLight.TrafficLightEventArgs e)
+        private void ctrlTrafficLightThird_FourthTrafficLightOn(object sender, ctrlTrafficLight.TrafficLightEventArgs e)
         {
-            MessageBox.Show(e.CurrentLight.ToString());
+            ctrlTrafficLightFourth.Start();
+        }
+        private void ctrlTrafficLightFourth_FirstTrafficLightOn(object sender, ctrlTrafficLight.TrafficLightEventArgs e)
+        {
+            ctrlTrafficLightFirst.Start();
+
         }
     }
 }
